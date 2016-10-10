@@ -1,6 +1,6 @@
 import config, json, base64, requests
 
-class comTwitter:
+class ComTwitter:
 
     def __init__(self):
         s = config.userKey + ':' + config.secretKey
@@ -24,22 +24,24 @@ class comTwitter:
     def tokenBearer(self):
         print(self.token_bearer)
 
-    def makeGetRequest(self, url, hashtag):
-        data = {
-            'q' : hashtag
-        }
+    # Corriger les erreurs, faire marcher filtre
+    def makeGetRequest(self, url, filt):
+        data = filt
         headers = {
             'Authorization' : 'Bearer ' + self.token_bearer,
             'Content-Type' : 'application/x-www-form-urlencoded',
             'User-Agent' : 'ApyTwitter v1.0'
         }
         r = requests.get(url, headers = headers)
-        return r
+        return self.generateTweet(r)
+
+    # Genère les objets tweet à partir des données reçues de Tweeter <!> Encodage
+    def generateTweet(self, r):
 
 if __name__ == "__main__":
-    cT = comTwitter()
+    cT = ComTwitter()
     cT.tokenBearer()
-    r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json?q=Trump&count=100', 'Trump')
+    r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json?q=Trump+Hillary&count=100', 'Trump')
     j = json.loads(r.text)
     tweets = j["statuses"]
     for tweet in tweets:
