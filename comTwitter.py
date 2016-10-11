@@ -53,4 +53,4 @@ if __name__ == "__main__":
     j = json.loads(r.text)
     tweets = j["statuses"]
     for tweet in tweets:
-print(str(tweet['text'].encode('utf-8')))
+        print(str(tweet['text'].encode('utf-8')))
