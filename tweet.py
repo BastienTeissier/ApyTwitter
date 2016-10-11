@@ -6,7 +6,7 @@ class Tweet:
         self._location = location
         self._user_name = user_name
         self._user_follower_count = user_follower_count
-        self.etiquettes=[]
+        self.etiquettes = []
 
     # Créer des properties pour tous les attributs sauf etiquette
 

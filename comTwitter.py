@@ -1,5 +1,4 @@
 import config, json, base64, requests
-
 import tweet
 
 class ComTwitter:
