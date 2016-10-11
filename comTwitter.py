@@ -32,16 +32,21 @@ class ComTwitter:
             'Content-Type' : 'application/x-www-form-urlencoded',
             'User-Agent' : 'ApyTwitter v1.0'
         }
-        r = requests.get(url, headers = headers)
+        r = requests.get(url, headers = headers, params=data)
+        print(r)
         return self.generateTweet(r)
 
     # Genère les objets tweet à partir des données reçues de Tweeter <!> Encodage
     def generateTweet(self, r):
+        return r
 
 if __name__ == "__main__":
     cT = ComTwitter()
     cT.tokenBearer()
-    r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json?q=Trump+Hillary&count=100', 'Trump')
+    r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', {
+        'q' : '#Samsung+Explosion',
+        'count' : '100'
+    })
     j = json.loads(r.text)
     tweets = j["statuses"]
     for tweet in tweets:
