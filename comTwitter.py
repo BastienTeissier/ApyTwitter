@@ -1,5 +1,7 @@
 import config, json, base64, requests
 
+import tweet
+
 class ComTwitter:
 
     def __init__(self):
@@ -44,8 +46,9 @@ if __name__ == "__main__":
     cT = ComTwitter()
     cT.tokenBearer()
     r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', {
-        'q' : '#Samsung+Explosion',
-        'count' : '100'
+        'q' : 'Hillary',
+        'count' : '1000',
+        'result_type' : 'popular'
     })
     j = json.loads(r.text)
     tweets = j["statuses"]
