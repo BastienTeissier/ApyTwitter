@@ -38,19 +38,32 @@ class ComTwitter:
         print(r)
         return self.generateTweet(r)
 
+    def extractHashtags(self, l):
+        return l
+
     # Genère les objets tweet à partir des données reçues de Tweeter <!> Encodage
     def generateTweet(self, r):
-        return r
+        j = json.loads(r.text)
+        ts = j["statuses"]
+        l = []
+        for t in ts:
+            l.append(tweet.Tweet(
+                str(t["text"].encode('utf-8')),
+                self.extractHashtags(t["entities"]["hashtags"]),
+                str(t["created_at"].encode('utf-8')),
+                t["geo"],
+                str(t["user"]["name"].encode('utf-8')),
+                int(t["user"]["followers_count"])
+            ))
+        return l
+
 
 if __name__ == "__main__":
     cT = ComTwitter()
     cT.tokenBearer()
-    r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', {
+    tweets = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', {
         'q' : 'Hillary',
-        'count' : '1000',
-        'result_type' : 'popular'
+        'count' : '100'
     })
-    j = json.loads(r.text)
-    tweets = j["statuses"]
     for tweet in tweets:
-        print(str(tweet['text'].encode('utf-8')))
+        print(tweet.text)
