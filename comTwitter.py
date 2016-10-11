@@ -38,8 +38,11 @@ class ComTwitter:
         print(r)
         return self.generateTweet(r)
 
-    def extractHashtags(self, l):
-        return l
+    def extractHashtags(self, hashtags):
+        r = []
+        for l in hashtags:
+            r.append(l["text"])
+        return r
 
     # Genère les objets tweet à partir des données reçues de Tweeter <!> Encodage
     def generateTweet(self, r):
@@ -67,3 +70,4 @@ if __name__ == "__main__":
     })
     for tweet in tweets:
         print(tweet.text)
+        print(tweet.hashtags)
