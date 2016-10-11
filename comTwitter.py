@@ -33,10 +33,12 @@ class ComTwitter:
             'User-Agent' : 'ApyTwitter v1.0'
         }
         r = requests.get(url, headers = headers)
-        return self.generateTweet(r)
+        return r
+        #return self.generateTweet(r)
 
     # Genère les objets tweet à partir des données reçues de Tweeter <!> Encodage
-    def generateTweet(self, r):
+    #def generateTweet(self, r):
+
 
 if __name__ == "__main__":
     cT = ComTwitter()
