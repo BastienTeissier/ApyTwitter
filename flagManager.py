@@ -10,7 +10,9 @@ class FlagManager:
             for current_tweet in tweets:
                 if all(key_word in current_tweet.text.lower() for key_word in current_flag.key_words):
                     current_tweet.etiquettes.append(current_flag.name)
-
+    
+    def setFlags(self, flags):
+        self.flags = flags
                     
 if __name__ == "__main__":
     tweet1 = tweet.Tweet("Hello, I am Donald #Hi", "Donald", "yesterday", "New York", "Toto", 150)
