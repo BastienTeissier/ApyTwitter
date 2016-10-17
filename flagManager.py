@@ -7,6 +7,7 @@ class FlagManager:
         self.flags = flags
 
     def putFlags(self, tweets):
+        print(tweets)
         for current_flag in self.flags:
             for current_tweet in tweets:
                 if all(key_word in current_tweet.text.lower() for key_word in current_flag.key_words):

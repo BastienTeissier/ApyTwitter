@@ -18,8 +18,9 @@ class Filt:
 
     def dico(self):
         str_key_words = ""
+        print(self._key_words)
         dico = {}
-        for words in self.key_words:
+        for words in self._key_words:
             if str_key_words == "":
                 str_key_words = words
             else:

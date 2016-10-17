@@ -58,6 +58,7 @@ class ComTwitter:
                 str(t["user"]["name"].encode('utf-8')),
                 int(t["user"]["followers_count"])
             ))
+        print(l)
         return l
 
 
