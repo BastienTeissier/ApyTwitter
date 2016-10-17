@@ -2,7 +2,7 @@ class Filt:
     def __init__( self, name, key_words, count = 100 ):
         self._name = name
         self._key_words = key_words #key_words est une liste de key words
-        self._count = count
+        self.count = count
 
     @property
     def name(self):
@@ -11,10 +11,6 @@ class Filt:
     @property
     def key_words(self):
         return self._key_words
-
-    @property
-    def count(self):
-        return self._count
 
     def dico(self):
         str_key_words = ""

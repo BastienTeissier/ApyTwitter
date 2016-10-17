@@ -14,11 +14,14 @@ class Factory:
 
     # Ajout des nouveaux flags/filters dans mainRest
 
-    def makeRequestWithExistingFilter(self, filter_name):
+    def makeRequestWithExistingFilter(self, filter_name, count=0):
         r = []
         for fil in self.filters:
             if fil.name == filter_name:
-                print(fil)
+                if count ==0 :
+                    count = fil.count
+                else:
+                    fil.count = count
                 r = Factory.cTwitter.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', fil.dico())
                 break
         self.flagManager.putFlags(r)
