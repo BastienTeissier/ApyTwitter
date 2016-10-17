@@ -4,4 +4,4 @@ class Flag:
         keys = []
         for word in key_words:
             keys.append(word.lower())
-        self.key_words = keys
+        self.key_words =keys
