@@ -16,14 +16,19 @@ class Factory:
 
     def makeRequestWithExistingFilter(self, filter_name):
         r = []
-        for filt in self.filters:
-            if filt.name == filter_name:
-                r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', filt)
+        for fil in self.filters:
+            if fil.name == filter_name:
+                r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', fil)
                 break
         fM.putFlags(r)
         return r
 
-    #def makeRequestWithNewFilter(self, filter):
+    def makeRequestWithNewFilter(self, fil):
+        r = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', fil)
+        fM.putFlags(r)
+        if fil.name:
+            self.filters += fil
+        return r
+
 
 if __name__ == "__main__":
-    factory = Factory([fa.Flag("sexe", ["bite", "chibre"])], [fi.Filt("Trump", ["Trump", "Pussy"])])

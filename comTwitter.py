@@ -70,8 +70,4 @@ if __name__ == "__main__":
     })
     for tweet in tweets:
         print(tweet.text)
-<<<<<<< HEAD
         print(tweet.hashtags)
-=======
-        print(tweet.hashtags)
->>>>>>> ead0aae57a73a555592489d11a73456bed45d6b8
