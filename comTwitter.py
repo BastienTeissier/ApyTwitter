@@ -65,8 +65,8 @@ if __name__ == "__main__":
     cT = ComTwitter()
     cT.tokenBearer()
     tweets = cT.makeGetRequest('https://api.twitter.com/1.1/search/tweets.json', {
-        'q' : 'Hillary',
-        'count' : '100'
+    "q" : "Trump+Hillary",
+    "count" : "1000"
     })
     for tweet in tweets:
         print(tweet.text)
