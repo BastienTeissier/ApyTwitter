@@ -1,15 +1,15 @@
-import comTwitter as cT
-import flagManager as fM
-import filt as fi
-import flag as fl
-import tweet as tw
+from ..controllers.comTwitter import ComTwitter as cT
+from ..controllers.flagManager import FlagManager as fM
+from ..controllers.filt import Filt
+from ..controllers.flag import Flag
+from ..controllers.tweet import Tweet
 
 class Factory:
-    cTwitter = cT.ComTwitter()
+    cTwitter = cT()
 
-    def __init__(self, flags, filters):
+    def __init__(self, flags=[], filters=[]):
         self.flags = flags
-        self.flagManager = fM.FlagManager(flags)
+        self.flagManager = fM(flags)
         self.filters = filters
 
     # Ajout des nouveaux flags/filters dans mainRest
@@ -32,7 +32,7 @@ class Factory:
         r = Factory.cTwitter.makeGetRequest("https://api.twitter.com/1.1/search/tweets.json", fil.dico())
         self.flagManager.putFlags(r)
         if fil.name:
-            self.filters += fil
+            self.filters += [fil]
         return r
 
     def addFlag(self, flag):
@@ -55,8 +55,8 @@ class Factory:
 
 
 if __name__ == "__main__":
-    filter1 = fi.Filt("filtre1", ["Trump"], 1000)
-    flag1 = fl.Flag("US2016", ['Trump', 'Hillary'])
+    filter1 = Filt("filtre1", ["Trump"], 1000)
+    flag1 = Flag("US2016", ['Trump', 'Hillary'])
     fact = Factory([flag1], [filter1])
     tweets = fact.makeRequestWithExistingFilter("filtre1")
     print(tweets)

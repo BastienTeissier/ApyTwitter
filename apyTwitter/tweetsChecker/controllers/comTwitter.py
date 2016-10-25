@@ -1,11 +1,13 @@
-import config, json, base64, requests
+import json, base64, requests
 
-import tweet
+from ..controllers.config import userKey, secretKey
+
+from ..controllers.tweet import Tweet
 
 class ComTwitter:
 
     def __init__(self):
-        s = config.userKey + ':' + config.secretKey
+        s = userKey + ':' + secretKey
         print(s)
         s64 = base64.b64encode(bytes(s.encode()))
         print(s64)
@@ -50,7 +52,7 @@ class ComTwitter:
         ts = j["statuses"]
         l = []
         for t in ts:
-            l.append(tweet.Tweet(
+            l.append(Tweet(
                 str(t["text"].encode('utf-8')),
                 self.extractHashtags(t["entities"]["hashtags"]),
                 str(t["created_at"].encode('utf-8')),

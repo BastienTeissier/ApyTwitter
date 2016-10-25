@@ -1,5 +1,5 @@
-import flag
-import tweet
+from ..controllers.flag import Flag
+from ..controllers.tweet import Tweet
 
 
 class FlagManager:
@@ -17,11 +17,11 @@ class FlagManager:
         self.flags = flags
 
 if __name__ == "__main__":
-    tweet1 = tweet.Tweet("Hello, I am Donald #Hi", "Donald", "yesterday", "New York", "Toto", 150)
-    tweet2 = tweet.Tweet("Hello, I am John #6", "John", "today", "New York", "Toto", 150)
+    tweet1 = Tweet("Hello, I am Donald #Hi", "Donald", "yesterday", "New York", "Toto", 150)
+    tweet2 = Tweet("Hello, I am John #6", "John", "today", "New York", "Toto", 150)
     tweets = [tweet1, tweet2]
 
-    flag1 = flag.Flag("Flag1", ["#hi"])
+    flag1 = Flag("Flag1", ["#hi"])
     flags = [flag1]
 
     Manager = FlagManager(flags)
