@@ -53,7 +53,7 @@ class ComTwitter:
         l = []
         for t in ts:
             l.append(Tweet(
-                str(t["text"].encode('utf-8')),
+                str(t["text"]),
                 self.extractHashtags(t["entities"]["hashtags"]),
                 str(t["created_at"].encode('utf-8')),
                 t["geo"],

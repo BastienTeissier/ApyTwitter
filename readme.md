@@ -9,3 +9,5 @@ Se rendre sur mongodb.org et télécharger le fichier d'installation msi
 ### Test
 Commande mongod et mongo
 <!> Attention au dbpath
+
+<!> Ne pas oublier config.py

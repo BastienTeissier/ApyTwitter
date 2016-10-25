@@ -71,6 +71,9 @@
                     {{ filt.name }}
                   </a>
                 </h4>
+                <form action="{% url 'reloadIndex' filt.name %}" method="GET">
+                  <input type="submit" value="Reload"/>
+                </form>
               </div>
               <div id="collapseFilterOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilterOne">
                 <div class="panel-body">
@@ -87,7 +90,7 @@
             {% endfor %}
           </ul>
         </div>
-        <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2">
+        <div class="col-sm-6 col-md-8">
           <h1 class="page-header">Tweets</h1>
 
           <h2 class="sub-header">Section title</h2>
@@ -113,7 +116,7 @@
         <!--
           Left side navbar
         -->
-        <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar">
+        <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li>
               <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#newFlagModal">Nouveau flag</button>

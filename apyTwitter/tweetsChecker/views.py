@@ -30,3 +30,16 @@ def index (request):
         'flags' : flags
     }
     return HttpResponse(template.render(context, request))
+
+def reloadIndex(request, filter_name):
+    print(filter_name)
+    filts = factory.filters
+    flags = factory.flags
+    tweets = factory.makeRequestWithExistingFilter(filter_name)
+    template = loader.get_template('tweetsChecker/index.html')
+    context = {
+        'tweets' : tweets,
+        'filts' : filts,
+        'flags' : flags
+    }
+    return HttpResponse(template.render(context, request))
