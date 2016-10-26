@@ -57,7 +57,7 @@ class ComTwitter:
                 self.extractHashtags(t["entities"]["hashtags"]),
                 str(t["created_at"].encode('utf-8')),
                 t["geo"],
-                str(t["user"]["name"].encode('utf-8')),
+                str(t["user"]["name"]),
                 int(t["user"]["followers_count"])
             ))
         print(l)
