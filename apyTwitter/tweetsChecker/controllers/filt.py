@@ -15,17 +15,15 @@ class Filt:
     def dico(self):
         str_key_words = ""
         print(self._key_words)
-        dico = {}
         for words in self._key_words:
             if str_key_words == "":
                 str_key_words = words
             else:
                 str_key_words += '+' + words #on transforme notre liste de key words en une chaine de caractères assimilable par l'API
-        dico = {
+        return {
             'q': str_key_words,
             'count' : self.count
-        }
-        return dico
+            }
 
 if __name__ == "__main__":
     filt1=Filt("Politics",["Trump","Hillary"],100)
