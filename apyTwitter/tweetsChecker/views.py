@@ -43,3 +43,6 @@ def reloadIndex(request, filter_name):
         'flags' : flags
     }
     return HttpResponse(template.render(context, request))
+
+#def addFlag(request, name, key_words):
+#    factory.
