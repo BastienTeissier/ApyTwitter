@@ -356,7 +356,7 @@
             {% endfor %}
           </ul>
         </div>
-        <div class="col-sm-6 col-md-8">
+        <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
           <h1 class="page-header">Tweets</h1>
 
           <h2 class="sub-header">Section title</h2>
@@ -380,9 +380,9 @@
         </div>
 
         <!--
-          Left side navbar
+          Right side navbar
         -->
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar">
           <ul class="nav nav-sidebar">
             <li>
               <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#newFlagModal">Nouveau flag</button>
@@ -413,14 +413,14 @@
             {% endfor %}
           </ul>
         </div>
-
       </div>
     </div>
 
         <!-- New Flag modal -->
     <div class="modal fade" id="newFlagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content" method="POST" action="{% url 'addNewFlag' %}">
+          {% csrf_token %}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Nouveau flag</h4>
@@ -428,23 +428,23 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="newFlagName">Nom du nouveau flag</label>
-              <input type="text" class="form-control" id="newFlagName" placeholder="Nom">
+              <input type="text" class="form-control" name="newFlagName" placeholder="Nom">
             </div>
             <div class="form-group">
               <label for="newFlagName">Mots clés</label>
-              <input type="text" class="form-control" id="newFlagKeyWords" placeholder="">
+              <input type="text" class="form-control" name="newFlagKeyWords" placeholder="">
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary">Enregistrer</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
 
 
-            <!-- New Flag modal -->
+        <!-- New Filter modal -->
         <div class="modal fade" id="newFilterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
