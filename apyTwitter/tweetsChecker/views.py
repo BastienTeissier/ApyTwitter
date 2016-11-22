@@ -57,4 +57,8 @@ def addNewFlag(request):
     return redirect("index")
 
 def addNewFilter(request):
-    return 0
+    if request.method == 'POST' and request.POST['newFilterName'] and request.POST['newFilterKeyWords']:
+        print(request.POST['newFilterName'])
+        print(request.POST['newFilterKeyWords'].split(" "))
+        factory.makeRequestWithNewFilter(Filt(request.POST['newFilterName'],request.POST['newFilterKeyWords'].split(" ")))
+    return redirect("index")
