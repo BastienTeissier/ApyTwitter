@@ -3,11 +3,17 @@ from ..controllers.flagManager import FlagManager as fM
 from ..controllers.filt import Filt
 from ..controllers.flag import Flag
 from ..controllers.tweet import Tweet
+from ..models import FlagModel, FiltModel
+
 
 class Factory:
     cTwitter = cT()
 
     def __init__(self, flags=[], filters=[]):
+        list_flags = FlagModel.get_saved_flags()
+        flags = flags + list_flags
+        list_filters = FiltModel.get_saved_filt()
+        filters = filters + list_filters
         self.flags = flags
         self.flagManager = fM(flags)
         self.filters = filters
@@ -36,25 +42,34 @@ class Factory:
         return r
 
     def addFlag(self, flag):
+        model = FlagModel()
+        model.to_model(flag)
+        model.save()
         self.flags.append(flag)
         self.flagManager.setFlags(self.flags)
 
     def addFlag(self, name, key_words):
+        flag = Flag(name, key_words)
+        model = FlagModel()
+        model.to_model(flag)
+        model.save()
         self.flags.append(Flag(name, key_words))
         self.flagManager.setFlags(self.flags)
-        print("Coucou")
-        for flag in self.flagManager.flags:
-            print(flag.name)
 
     def deleteFlag(self, flag):
         self.flags.remove(flag)
         self.flagManager.setFlags(self.flags)
+        FlagModel.delete_flag(flag.name)
 
     def addFilter(self, fil):
+        model = FiltModel()
+        model.to_model(fil)
+        model.save()
         self.filters.append(fil)
 
     def deleteFilter(self, fil):
         self.filters.remove(fil)
+        FiltModel.delete_filt(fil.name)
 
 
 if __name__ == "__main__":
