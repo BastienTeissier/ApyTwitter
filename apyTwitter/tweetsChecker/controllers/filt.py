@@ -55,11 +55,10 @@ class Filt:
                 str_key_words = words
             else:
                 str_key_words += '+' + words
-        dico = {
+        return {
             'q': str_key_words,
             'count' : self.count
         }
-        return dico
 
 if __name__ == "__main__":
     filt1=Filt("Politics",["Trump","Hillary"],100)
