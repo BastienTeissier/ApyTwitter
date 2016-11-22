@@ -30,10 +30,14 @@ class Filt:
         self._name = name
         self.count = count
 
+        # Mets les mots clès en minuscule
+
         keys = []
         for word in key_words:
             keys.append(word.lower())
         self._key_words = keys
+
+    # Créer des properties pour tous les attributs sauf count. La modification des filtres se fait par ajout de nouveaux filtres ou suppression d'existants
 
     @property
     def name(self):
@@ -43,7 +47,7 @@ class Filt:
     def key_words(self):
         return self._key_words
 
-
+    # Méthode transformant la liste de key_words initiale en dictionnaire assimilable par l'API de Twitter
     def dico(self):
         str_key_words = ""
         for words in self._key_words:

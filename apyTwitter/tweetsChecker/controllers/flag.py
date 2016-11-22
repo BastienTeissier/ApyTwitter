@@ -22,10 +22,14 @@ class Flag:
 
         self._name = name
 
+        # Mets les mots clés en minuscule
+
         keys = []
         for word in key_words:
             keys.append(word.lower())
         self._key_words = keys
+
+    # Créer des properties pour tous les attributs. La modification de flag se fait par ajout de nouveaux flags ou suppression d'existants.
 
     @property
     def name(self):
