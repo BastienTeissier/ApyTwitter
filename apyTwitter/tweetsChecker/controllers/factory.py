@@ -40,8 +40,11 @@ class Factory:
         self.flagManager.setFlags(self.flags)
 
     def addFlag(self, name, key_words):
-        self.flags.append(fl.Flag(name, key_words))
+        self.flags.append(Flag(name, key_words))
         self.flagManager.setFlags(self.flags)
+        print("Coucou")
+        for flag in self.flagManager.flags:
+            print(flag.name)
 
     def deleteFlag(self, flag):
         self.flags.remove(flag)
