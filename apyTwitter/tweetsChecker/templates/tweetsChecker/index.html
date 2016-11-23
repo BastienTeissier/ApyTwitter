@@ -331,9 +331,9 @@
           <ul class="nav nav-sidebar list-group">
             {% for filt in filts %}
             <li class="list-group-item">
-              <div class="panel-default" role="tab" id="heading{{filt.name}}">
+              <div class="panel-default" role="tab" id="heading{{filt.clean_name}}">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilter{{filt.name}}" aria-expanded="true" aria-controls="collapseFilter{{filt.name}}">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilter{{filt.clean_name}}" aria-expanded="true" aria-controls="collapseFilter{{filt.clean_name}}">
                     {{ filt.name }}
                   </a>
                 </h4>
@@ -346,7 +346,7 @@
                   </form>
                 </div>
               </div>
-              <div id="collapseFilter{{filt.name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilter{{filt.name}}">
+              <div id="collapseFilter{{filt.clean_name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilter{{filt.clean_name}}">
                 <div class="panel-body">
                   <h4>{{ filt.name }}</h4>
                   <h5>Mots clés :</h5>
