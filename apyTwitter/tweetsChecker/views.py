@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
@@ -36,7 +37,7 @@ def index (request):
     }
     return HttpResponse(template.render(context, request))
 
-def reloadIndex(request, filter_name):
+def reloadFilter(request, filter_name):
     print(filter_name)
     filts = factory.filters
     flags = factory.flags
@@ -61,4 +62,12 @@ def addNewFilter(request):
         print(request.POST['newFilterName'])
         print(request.POST['newFilterKeyWords'].split(" "))
         factory.makeRequestWithNewFilter(Filt(request.POST['newFilterName'],request.POST['newFilterKeyWords'].split(" ")))
+    return redirect("index")
+
+def deleteFilter(request, filter_name):
+    factory.deleteFilter(filter_name)
+    return redirect("index")
+
+def deleteFlag(request, flag_name):
+    factory.deleteFlag(flag_name)
     return redirect("index")
