@@ -56,10 +56,13 @@ class Factory:
         self.flags.append(Flag(name, key_words))
         self.flagManager.setFlags(self.flags)
 
-    def deleteFlag(self, flag):
-        self.flags.remove(flag)
-        self.flagManager.setFlags(self.flags)
-        FlagModel.delete_flag(flag.name)
+    def deleteFlag(self, flag_name):
+        for flag in self.flags:
+            if flag.clean_name == flag_name:
+                self.flags.remove(flag)
+                self.flagManager.setFlags(self.flags)
+                FlagModel.delete_flag(flag.name)
+                break
 
     def addFilter(self, fil):
         model = FiltModel()
@@ -67,9 +70,12 @@ class Factory:
         model.save()
         self.filters.append(fil)
 
-    def deleteFilter(self, fil):
-        self.filters.remove(fil)
-        FiltModel.delete_filt(fil.name)
+    def deleteFilter(self, filter_name):
+        for fil in self.filters:
+            if fil.clean_name == filter_name:
+                self.filters.remove(fil)
+                FiltModel.delete_filt(fil.name)
+                break
 
 
 if __name__ == "__main__":

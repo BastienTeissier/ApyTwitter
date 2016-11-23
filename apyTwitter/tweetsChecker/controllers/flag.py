@@ -36,6 +36,10 @@ class Flag:
         return self._name
 
     @property
+    def clean_name(self):
+        return self._name.replace(" ","_")
+
+    @property
     def key_words(self):
         return self._key_words
 

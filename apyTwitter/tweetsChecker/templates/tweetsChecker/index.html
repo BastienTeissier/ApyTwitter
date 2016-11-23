@@ -331,17 +331,22 @@
           <ul class="nav nav-sidebar list-group">
             {% for filt in filts %}
             <li class="list-group-item">
-              <div class="panel-default" role="tab" id="headingOne">
+              <div class="panel-default" role="tab" id="heading{{filt.name}}">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilterOne" aria-expanded="true" aria-controls="collapseFilterOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilter{{filt.name}}" aria-expanded="true" aria-controls="collapseFilter{{filt.name}}">
                     {{ filt.name }}
                   </a>
                 </h4>
-                <form action="{% url 'reloadIndex' filt.name %}" method="GET">
-                  <input type="submit" value="Reload"/>
-                </form>
+                <div class="row">
+                  <form action="{% url 'reloadFilter' filt.name %}" method="GET">
+                    <button class="btn btn-success" type="submit">Reload</button>
+                  </form>
+                  <form action="{% url 'deleteFilter' filt.name %}" method="DELETE">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                  </form>
+                </div>
               </div>
-              <div id="collapseFilterOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilterOne">
+              <div id="collapseFilter{{filt.name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilter{{filt.name}}">
                 <div class="panel-body">
                   <h4>{{ filt.name }}</h4>
                   <h5>Mots clés :</h5>
@@ -391,14 +396,17 @@
           <ul class="nav nav-sidebar list-group">
             {% for flag in flags %}
             <li class="list-group-item">
-              <div class="panel-default" role="tab" id="headingOne">
+              <div class="panel-default" role="tab" id="heading{{flag.clean_name}}">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFlagOne" aria-expanded="true" aria-controls="collapseFlagOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFlag{{flag.clean_name}}" aria-expanded="true" aria-controls="collapseFlag{{flag.clean_name}}">
                     {{ flag.name }}
                   </a>
                 </h4>
+                <form action="{% url 'deleteFlag' flag.clean_name %}" method="DELETE">
+                  <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
               </div>
-              <div id="collapseFlagOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFlagOne">
+              <div id="collapseFlag{{flag.clean_name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFlag{{flag.clean_name}}">
                 <div class="panel-body">
                   <h4>{{ flag.name }}</h4>
                   <h5>Mots clés :</h5>
