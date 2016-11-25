@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^flag/delete/(?P<flag_name>[\w.@+-]+)/$', views.deleteFlag, name="deleteFlag"),
     url(r'^post/flag/$', views.addNewFlag, name="addNewFlag"),
     url(r'^post/filter/$', views.addNewFilter, name="addNewFilter"),
+    url(r'^post/search/$', views.search, name="search"),
 ]

@@ -349,14 +349,20 @@
                   </ul>
                 </div>
               </div>
-              <div style="display: inline;">
-                <form action="{% url 'reloadFilter' filt.name %}" method="GET">
-                  <button class="btn btn-success" type="submit">Reload</button>
-                </form>
-                <form action="{% url 'deleteFilter' filt.name %}" method="DELETE">
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-              </div>
+              <table style="display: inline;">
+                <tr>
+                  <td>
+                    <form action="{% url 'reloadFilter' filt.name %}" method="GET">
+                      <button class="btn btn-success" type="submit">Reload</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="{% url 'deleteFilter' filt.name %}" method="DELETE">
+                      <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              </table>
             </li>
             {% endfor %}
           </ul>
@@ -364,7 +370,20 @@
         <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
           <h1 class="page-header">Tweets</h1>
 
-          <h2 class="sub-header">Section title</h2>
+          <form action="{% url 'search' %}" method="POST">
+            {% csrf_token %}
+            <table>
+              <tr>
+                <td>
+                  <input type="text" class="form-control" placeholder="Mots clés" name="keyWords"/>
+                </td>
+                <td>
+                  <button type="submit" class ="btn btn-primary">Recherche</button>
+                </td>
+              </tr>
+            </table>
+          </form>
+
           <ul class="list-group">
             {% for tweet in tweets%}
             <li class="list-group-item panel panel-default">

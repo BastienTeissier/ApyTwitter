@@ -20,8 +20,8 @@ class Filt:
         for words in key_words:
             if words.strip() == "":
                 raise ValueError("Entrez des mots clés corrects")
-        if name.strip() == "":
-            raise ValueError("Entrez un nom de filtre correct")
+        #if name.strip() == "":
+        #    raise ValueError("Entrez un nom de filtre correct")
         if count <= 0:
             raise ValueError("Entrez un nombre de tweets positifs")
         if count > 100:

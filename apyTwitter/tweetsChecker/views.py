@@ -63,6 +63,9 @@ def addNewFilter(request):
     if request.method == 'POST' and request.POST['newFilterName'] and request.POST['newFilterKeyWords']:
         print(request.POST['newFilterName'])
         print(request.POST['newFilterKeyWords'].split(" "))
+        ##
+        ## A CORRIGER
+        ##
         factory.makeRequestWithNewFilter(Filt(request.POST['newFilterName'],request.POST['newFilterKeyWords'].split(" ")))
     return redirect("index")
 
@@ -73,3 +76,17 @@ def deleteFilter(request, filter_name):
 def deleteFlag(request, flag_name):
     factory.deleteFlag(flag_name)
     return redirect("index")
+
+def search(request):
+    if request.method == 'POST' and request.POST['keyWords']:
+            filts = factory.filters
+            flags = factory.flags
+            tweets = factory.makeRequestWithNewFilter(Filt("",request.POST['keyWords'].split(" ")))
+            print(tweets)
+            template = loader.get_template('tweetsChecker/index.html')
+            context = {
+                'tweets' : tweets,
+                'filts' : filts,
+                'flags' : flags
+            }
+            return HttpResponse(template.render(context, request))
