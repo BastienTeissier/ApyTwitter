@@ -337,18 +337,10 @@
                     {{ filt.name }}
                   </a>
                 </h4>
-                <div class="row">
-                  <form action="{% url 'reloadFilter' filt.name %}" method="GET">
-                    <button class="btn btn-success" type="submit">Reload</button>
-                  </form>
-                  <form action="{% url 'deleteFilter' filt.name %}" method="DELETE">
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                  </form>
-                </div>
               </div>
               <div id="collapseFilter{{filt.clean_name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilter{{filt.clean_name}}">
                 <div class="panel-body">
-                  <h4>{{ filt.name }}</h4>
+                  <!--<h4>{{ filt.name }}</h4>-->
                   <h5>Mots clés :</h5>
                   <ul class="list-group">
                     {%for key_word in filt.key_words %}
@@ -356,6 +348,14 @@
                     {% endfor %}
                   </ul>
                 </div>
+              </div>
+              <div style="display: inline;">
+                <form action="{% url 'reloadFilter' filt.name %}" method="GET">
+                  <button class="btn btn-success" type="submit">Reload</button>
+                </form>
+                <form action="{% url 'deleteFilter' filt.name %}" method="DELETE">
+                  <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
               </div>
             </li>
             {% endfor %}

@@ -34,7 +34,8 @@ class Factory:
         return r
 
     def makeRequestWithNewFilter(self, fil):
-        print(fil.dico())
+        if fil.name!="":
+            self.addFilter(fil)
         r = Factory.cTwitter.makeGetRequest("https://api.twitter.com/1.1/search/tweets.json", fil.dico())
         self.flagManager.putFlags(r)
         if fil.name:

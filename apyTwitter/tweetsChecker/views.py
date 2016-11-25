@@ -10,7 +10,7 @@ from .controllers.filt import Filt
 from .controllers.flag import Flag
 
 from .controllers.factory import Factory
-
+'''
 factory = Factory( [
     Flag("Primaire", ["Primaire"]),
     Flag("USA2016", ["Clinton","Obama"]),
@@ -22,7 +22,9 @@ factory = Factory( [
     Filt("Juppe", ["Juppe, Juppé"]),
     Filt("Sarkozy", ["Sarkozy"]),
 ])
+'''
 
+factory = Factory()
 
 def index (request):
     filts = factory.filters
