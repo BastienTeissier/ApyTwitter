@@ -313,9 +313,7 @@
           <a class="navbar-brand" href="#">ApyTwitter</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Nombre éléments">
-          </form>
+
         </div>
       </div>
     </nav>
@@ -349,14 +347,14 @@
                   </ul>
                 </div>
               </div>
-              <table style="display: inline;">
+              <table style="margin-top: 10px;">
                 <tr>
-                  <td>
+                  <td style="padding-right:10px;">
                     <form action="{% url 'reloadFilter' filt.name %}" method="GET">
                       <button class="btn btn-success" type="submit">Reload</button>
                     </form>
                   </td>
-                  <td>
+                  <td style="padding-right:10px;">
                     <form action="{% url 'deleteFilter' filt.name %}" method="DELETE">
                       <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
@@ -370,37 +368,34 @@
         <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
           <h1 class="page-header">Tweets</h1>
 
-          <form action="{% url 'search' %}" method="POST">
-            {% csrf_token %}
-            <table>
-              <tr>
-                <td>
-                  <input type="text" class="form-control" placeholder="Mots clés" name="keyWords"/>
-                </td>
-                <td>
-                  <button type="submit" class ="btn btn-primary">Recherche</button>
-                </td>
-              </tr>
-            </table>
-          </form>
-
-          <ul class="list-group">
-            {% for tweet in tweets%}
-            <li class="list-group-item panel panel-default">
-              <div class="panel-heading">
-                <div>{{tweet.user_name}}</div>
+          <div style="margin-bottom:50px;">
+            <form action="{% url 'search' %}" method="POST" class="form-horizontal" style="margin-bottom:20px;">
+              {% csrf_token %}
+              <div>
+                <input type="text" class="form-control" placeholder="Mots clés" name="keyWords"/>
+                <button type="submit" class ="btn btn-primary" style="margin-top:5px;float:right;">Recherche</button>
               </div>
-              <div class="panel-body">
-                <div class="col-md-4">
-                  {% for flag in tweet.etiquettes %}
-                    {{flag}}
-                  {% endfor %}
+            </form>
+          </div>
+          <div>
+            <ul class="list-group">
+              {% for tweet in tweets%}
+              <li class="list-group-item panel panel-default">
+                <div class="panel-heading">
+                  <div>{{tweet.user_name}}</div>
                 </div>
-                <div class="col-md-8">{{tweet.text}}</div>
-              </div>
-            </li>
-            {% endfor %}
-          </ul>
+                <div class="panel-body">
+                  <div class="col-md-4">
+                    {% for flag in tweet.etiquettes %}
+                      {{flag}}
+                    {% endfor %}
+                  </div>
+                  <div class="col-md-8">{{tweet.text}}</div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
 
         <!--
@@ -421,13 +416,9 @@
                     {{ flag.name }}
                   </a>
                 </h4>
-                <form action="{% url 'deleteFlag' flag.clean_name %}" method="DELETE">
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
               </div>
               <div id="collapseFlag{{flag.clean_name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFlag{{flag.clean_name}}">
                 <div class="panel-body">
-                  <h4>{{ flag.name }}</h4>
                   <h5>Mots clés :</h5>
                   <ul class="list-group">
                     {%for key_word in flag.key_words %}
@@ -436,6 +427,9 @@
                   </ul>
                 </div>
               </div>
+              <form action="{% url 'deleteFlag' flag.clean_name %}" method="DELETE" style="margin-top: 10px;">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
             </li>
             {% endfor %}
           </ul>

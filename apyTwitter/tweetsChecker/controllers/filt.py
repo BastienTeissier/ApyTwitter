@@ -1,3 +1,5 @@
+import urllib
+
 class Filt:
     def __init__(self, name, key_words, count = 100 ):
         '''
@@ -45,7 +47,7 @@ class Filt:
 
     @property
     def clean_name(self):
-        return self._name.replace(" ","_")
+        return urllib.parse.quote(self._name.replace(" ","_").replace("/",""), safe='')
 
     @property
     def key_words(self):

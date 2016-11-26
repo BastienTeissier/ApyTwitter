@@ -1,3 +1,5 @@
+import urllib
+
 class Flag:
     def __init__(self, name, key_words):
         '''
@@ -37,7 +39,7 @@ class Flag:
 
     @property
     def clean_name(self):
-        return self._name.replace(" ","_")
+        return urllib.parse.quote(self._name.replace(" ","_").replace("/",""), safe='')
 
     @property
     def key_words(self):
