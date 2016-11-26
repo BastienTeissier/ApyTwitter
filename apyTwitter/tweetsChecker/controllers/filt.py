@@ -1,3 +1,5 @@
+import urllib
+
 class Filt:
     def __init__(self, name, key_words, count = 100 ):
         '''
@@ -20,8 +22,8 @@ class Filt:
         for words in key_words:
             if words.strip() == "":
                 raise ValueError("Entrez des mots clés corrects")
-        if name.strip() == "":
-            raise ValueError("Entrez un nom de filtre correct")
+        #if name.strip() == "":
+        #    raise ValueError("Entrez un nom de filtre correct")
         if count <= 0:
             raise ValueError("Entrez un nombre de tweets positifs")
         if count > 100:
@@ -45,7 +47,7 @@ class Filt:
 
     @property
     def clean_name(self):
-        return self._name.replace(" ","_")
+        return urllib.parse.quote(self._name.replace(" ","_").replace("/",""), safe='')
 
     @property
     def key_words(self):
