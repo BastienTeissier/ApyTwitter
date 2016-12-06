@@ -1,5 +1,5 @@
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 from django.template import loader
 from django.shortcuts import redirect
 
@@ -8,6 +8,7 @@ from django import forms
 from .controllers.tweet import Tweet
 from .controllers.filt import Filt
 from .controllers.flag import Flag
+from .controllers.Exceptions import Mon_exception
 
 from .controllers.factory import Factory
 
@@ -48,22 +49,36 @@ def reloadFilter(request, filter_name):
 
 # Controller utilisé pour l'ajout d'un nouveau flag, renvoie à la page de base
 def addNewFlag(request):
-    if request.method == 'POST' and request.POST['newFlagName'] and request.POST['newFlagKeyWords']:
-        print(request.POST['newFlagName'])
-        print(request.POST['newFlagKeyWords'].split(" "))
-        factory.addFlag(request.POST['newFlagName'],request.POST['newFlagKeyWords'].split(" "))
-    return redirect("index")
+    try:
+        if request.method == 'POST' and request.POST['newFlagName'] and request.POST['newFlagKeyWords']:
+            print(request.POST['newFlagName'])
+            print(request.POST['newFlagKeyWords'].split(" "))
+            factory.addFlag(request.POST['newFlagName'],request.POST['newFlagKeyWords'].split(" "))
+        return redirect("index")
+    except Mon_exception as err:
+        template = loader.get_template('tweetsChecker/error.html')
+        context = {
+            'error_number' : err.code,
+            'error_value' : err.__str__()
+        }
+        return HttpResponseServerError(template.render(context, request))
 
 # Controlle utilise pour rajouter un nouveau filtre, renvoie la page charger avec le nouveau filtre
 def addNewFilter(request):
-    if request.method == 'POST' and request.POST['newFilterName'] and request.POST['newFilterKeyWords']:
-        print(request.POST['newFilterName'])
-        print(request.POST['newFilterKeyWords'].split(" "))
-        ##
-        ## A CORRIGER
-        ##
-        factory.makeRequestWithNewFilter(Filt(request.POST['newFilterName'],request.POST['newFilterKeyWords'].split(" ")))
-    return redirect("index")
+    try:
+        if request.method == 'POST' and request.POST['newFilterName'] and request.POST['newFilterKeyWords']:
+            print(request.POST['newFilterName'])
+            print(request.POST['newFilterKeyWords'].split(" "))
+            newly_created_filter = Filt(request.POST['newFilterName'],request.POST['newFilterKeyWords'].split(" "))
+            factory.makeRequestWithNewFilter(newly_created_filter)
+        return redirect(reloadFilter, filter_name=newly_created_filter.clean_name)
+    except Mon_exception as err:
+        template = loader.get_template('tweetsChecker/error.html')
+        context = {
+            'error_number' : err.code,
+            'error_value' : err.__str__()
+        }
+        return HttpResponseServerError(template.render(context, request))
 
 def deleteFilter(request, filter_name):
     factory.deleteFilter(filter_name)
