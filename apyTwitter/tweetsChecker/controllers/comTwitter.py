@@ -4,13 +4,14 @@ from ..controllers.config import userKey, secretKey
 
 from ..controllers.tweet import Tweet
 
+
 class ComTwitter:
 
     def __init__(self):
 
         #Génération de la clé et authentification auprès de Twitter
         s = userKey + ':' + secretKey
-        print(s)
+        print('userKey : secretKey',s)
         s64 = base64.b64encode(bytes(s.encode()))
         print(s64)
         s = str(s64.decode())
@@ -48,7 +49,7 @@ class ComTwitter:
             r.append(l["text"])
         return r
 
-    # Genère les objets tweet à partir des données reçues de Tweeter <!> Encodage
+    # Genère les objets tweet à partir des données reçues de Tweeter
     def generateTweet(self, r):
         j = json.loads(r.text)
         ts = j["statuses"]
