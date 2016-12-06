@@ -12,7 +12,7 @@ class Filt:
         '''
 
         if not isinstance(name,str):
-            raise Nom_incorrect()
+            raise Mon_exception("Entrez un nom de filtre correct")
         if not isinstance(key_words, list):
             raise TypeError("key_words doit être une liste")
         for words in key_words:
@@ -22,13 +22,7 @@ class Filt:
             raise TypeError("Entrez un nombre entier de tweets")
         for words in key_words:
             if words.strip() == "":
-                raise Mots_cles_incorrects()
-        #if name.strip() == "":
-        #    raise ValueError("Entrez un nom de filtre correct")
-        if count <= 0:
-            raise ValueError("Entrez un nombre de tweets positifs")
-        if count > 100:
-            raise ValueError("Entrez un nombre inférieur à 100")
+                raise Mon_exception("Entrez des mots-clés corrects")
 
         self._name = name
         self.count = count
@@ -68,9 +62,10 @@ class Filt:
         }
 
 if __name__ == "__main__":
-    filt1=Filt("Politics",["Trump","Hillary"],100)
-    print(filt1.name)
-    print(filt1.count)
-    print(filt1.key_words)
-    print(filt1.dico())
+    try:
+        filt1=Filt("Politics",["Trump","Hillary"],100)
+        print(filt1.name)
+    except Mon_exception as err:
+        print(err.__str__())
+
 
