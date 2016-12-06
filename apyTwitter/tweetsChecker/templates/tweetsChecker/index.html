@@ -21,7 +21,281 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="styles.css" rel="stylesheet">
+    <style>
+    /*
+     * Base structure
+     */
+
+    /* Move down content because we have a fixed navbar that is 50px tall */
+    body {
+      padding-top: 50px;
+    }
+
+
+    /*
+     * Global add-ons
+     */
+
+    .sub-header {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    /*
+     * Top navigation
+     * Hide default border to remove 1px line.
+     */
+    .navbar-fixed-top {
+      border: 0;
+    }
+
+    /*
+     * Sidebar
+     */
+
+    /* Hide for mobile, show later */
+    .sidebar {
+      display: none;
+    }
+    @media (min-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #f5f5f5;
+        border-right: 1px solid #eee;
+      }
+    }
+
+    /* Sidebar navigation */
+    .nav-sidebar {
+      margin-right: -21px; /* 20px padding + 1px border */
+      margin-bottom: 20px;
+      margin-left: -20px;
+    }
+    .nav-sidebar > li > a {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+    .nav-sidebar > .active > a,
+    .nav-sidebar > .active > a:hover,
+    .nav-sidebar > .active > a:focus {
+      color: #fff;
+      background-color: #428bca;
+    }
+
+
+    /*
+     * Main content
+     */
+
+    .main {
+      padding: 20px;
+    }
+    @media (min-width: 768px) {
+      .main {
+        padding-right: 40px;
+        padding-left: 40px;
+      }
+    }
+    .main .page-header {
+      margin-top: 0;
+    }
+
+
+    /*
+     * Placeholder dashboard ideas
+     */
+
+    .placeholders {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .placeholders h4 {
+      margin-bottom: 0;
+    }
+    .placeholder {
+      margin-bottom: 20px;
+    }
+    .placeholder img {
+      display: inline-block;
+      border-radius: 50%;
+    }
+
+    /*
+     * Globals
+     */
+
+    body {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      color: #555;
+    }
+
+    h1, .h1,
+    h2, .h2,
+    h3, .h3,
+    h4, .h4,
+    h5, .h5,
+    h6, .h6 {
+      margin-top: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: normal;
+      color: #333;
+    }
+
+
+    /*
+     * Override Bootstrap's default container.
+     */
+
+    @media (min-width: 1200px) {
+      .container {
+        width: 970px;
+      }
+    }
+
+
+    /*
+     * Masthead for nav
+     */
+
+    .blog-masthead {
+      background-color: #428bca;
+      -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+              box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+    }
+
+    /* Nav links */
+    .blog-nav-item {
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+      font-weight: 500;
+      color: #cdddeb;
+    }
+    .blog-nav-item:hover,
+    .blog-nav-item:focus {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Active state gets a caret at the bottom */
+    .blog-nav .active {
+      color: #fff;
+    }
+    .blog-nav .active:after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      margin-left: -5px;
+      vertical-align: middle;
+      content: " ";
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid;
+      border-left: 5px solid transparent;
+    }
+
+
+    /*
+     * Blog name and description
+     */
+
+    .blog-header {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    .blog-title {
+      margin-top: 30px;
+      margin-bottom: 0;
+      font-size: 60px;
+      font-weight: normal;
+    }
+    .blog-description {
+      font-size: 20px;
+      color: #999;
+    }
+
+
+    /*
+     * Main column and sidebar layout
+     */
+
+    .blog-main {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    /* Sidebar modules for boxing content */
+    .sidebar-module {
+      padding: 15px;
+      margin: 0 -15px 15px;
+    }
+    .sidebar-module-inset {
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+    }
+    .sidebar-module-inset p:last-child,
+    .sidebar-module-inset ul:last-child,
+    .sidebar-module-inset ol:last-child {
+      margin-bottom: 0;
+    }
+
+
+    /* Pagination */
+    .pager {
+      margin-bottom: 60px;
+      text-align: left;
+    }
+    .pager > li > a {
+      width: 140px;
+      padding: 10px 20px;
+      text-align: center;
+      border-radius: 30px;
+    }
+
+
+    /*
+     * Blog posts
+     */
+
+    .blog-post {
+      margin-bottom: 60px;
+    }
+    .blog-post-title {
+      margin-bottom: 5px;
+      font-size: 40px;
+    }
+    .blog-post-meta {
+      margin-bottom: 20px;
+      color: #999;
+    }
+
+
+    /*
+     * Footer
+     */
+
+    .blog-footer {
+      padding: 40px 0;
+      color: #999;
+      text-align: center;
+      background-color: #f9f9f9;
+      border-top: 1px solid #e5e5e5;
+    }
+    .blog-footer p:last-child {
+      margin-bottom: 0;
+    }
+
+    </style>
 
   </head>
 
@@ -39,22 +313,12 @@
           <a class="navbar-brand" href="#">ApyTwitter</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <!--
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-        -->
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Nombre éléments">
-          </form>
+
         </div>
       </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid bod">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
@@ -65,19 +329,16 @@
           <ul class="nav nav-sidebar list-group">
             {% for filt in filts %}
             <li class="list-group-item">
-              <div class="panel-default" role="tab" id="headingOne">
+              <div class="panel-default" role="tab" id="heading{{filt.clean_name}}">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilterOne" aria-expanded="true" aria-controls="collapseFilterOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFilter{{filt.clean_name}}" aria-expanded="true" aria-controls="collapseFilter{{filt.clean_name}}">
                     {{ filt.name }}
                   </a>
                 </h4>
-                <form action="{% url 'reloadIndex' filt.name %}" method="GET">
-                  <input type="submit" value="Reload"/>
-                </form>
               </div>
-              <div id="collapseFilterOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilterOne">
+              <div id="collapseFilter{{filt.clean_name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFilter{{filt.clean_name}}">
                 <div class="panel-body">
-                  <h4>{{ filt.name }}</h4>
+                  <!--<h4>{{ filt.name }}</h4>-->
                   <h5>Mots clés :</h5>
                   <ul class="list-group">
                     {%for key_word in filt.key_words %}
@@ -86,37 +347,61 @@
                   </ul>
                 </div>
               </div>
+              <table style="margin-top: 10px;">
+                <tr>
+                  <td style="padding-right:10px;">
+                    <form action="{% url 'reloadFilter' filt.name %}" method="GET">
+                      <button class="btn btn-success" type="submit">Reload</button>
+                    </form>
+                  </td>
+                  <td style="padding-right:10px;">
+                    <form action="{% url 'deleteFilter' filt.name %}" method="DELETE">
+                      <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              </table>
             </li>
             {% endfor %}
           </ul>
         </div>
-        <div class="col-sm-6 col-md-8">
+        <div class="col-sm-6 col-md-8 col-sm-offset-3 col-md-offset-2">
           <h1 class="page-header">Tweets</h1>
 
-          <h2 class="sub-header">Section title</h2>
-          <ul class="list-group">
-            {% for tweet in tweets%}
-            <li class="list-group-item panel panel-default">
-              <div class="panel-heading">
-                <div>{{tweet.user_name}}</div>
+          <div style="margin-bottom:50px;">
+            <form action="{% url 'search' %}" method="POST" class="form-horizontal" style="margin-bottom:20px;">
+              {% csrf_token %}
+              <div>
+                <input type="text" class="form-control" placeholder="Mots clés" name="keyWords"/>
+                <button type="submit" class ="btn btn-primary" style="margin-top:5px;float:right;">Recherche</button>
               </div>
-              <div class="panel-body">
-                <div class="col-md-4">
-                  {% for flag in tweet.etiquettes %}
-                    {{flag}}
-                  {% endfor %}
+            </form>
+          </div>
+          <div>
+            <ul class="list-group">
+              {% for tweet in tweets%}
+              <li class="list-group-item panel panel-default">
+                <div class="panel-heading">
+                  <div>{{tweet.user_name}}</div>
                 </div>
-                <div class="col-md-8">{{tweet.text}}</div>
-              </div>
-            </li>
-            {% endfor %}
-          </ul>
+                <div class="panel-body">
+                  <div class="col-md-4">
+                    {% for flag in tweet.etiquettes %}
+                      <span class="badge">{{flag}}</span>
+                    {% endfor %}
+                  </div>
+                  <div class="col-md-8">{{tweet.text}}</div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
 
         <!--
-          Left side navbar
+          Right side navbar
         -->
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 sidebar">
           <ul class="nav nav-sidebar">
             <li>
               <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#newFlagModal">Nouveau flag</button>
@@ -125,16 +410,15 @@
           <ul class="nav nav-sidebar list-group">
             {% for flag in flags %}
             <li class="list-group-item">
-              <div class="panel-default" role="tab" id="headingOne">
+              <div class="panel-default" role="tab" id="heading{{flag.clean_name}}">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFlagOne" aria-expanded="true" aria-controls="collapseFlagOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFlag{{flag.clean_name}}" aria-expanded="true" aria-controls="collapseFlag{{flag.clean_name}}">
                     {{ flag.name }}
                   </a>
                 </h4>
               </div>
-              <div id="collapseFlagOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFlagOne">
+              <div id="collapseFlag{{flag.clean_name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFlag{{flag.clean_name}}">
                 <div class="panel-body">
-                  <h4>{{ flag.name }}</h4>
                   <h5>Mots clés :</h5>
                   <ul class="list-group">
                     {%for key_word in flag.key_words %}
@@ -143,18 +427,21 @@
                   </ul>
                 </div>
               </div>
+              <form action="{% url 'deleteFlag' flag.clean_name %}" method="DELETE" style="margin-top: 10px;">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
             </li>
             {% endfor %}
           </ul>
         </div>
-
       </div>
     </div>
 
         <!-- New Flag modal -->
     <div class="modal fade" id="newFlagModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form class="modal-content" method="POST" action="{% url 'addNewFlag' %}">
+          {% csrf_token %}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Nouveau flag</h4>
@@ -162,26 +449,27 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="newFlagName">Nom du nouveau flag</label>
-              <input type="text" class="form-control" id="newFlagName" placeholder="Nom">
+              <input type="text" class="form-control" name="newFlagName" placeholder="Nom">
             </div>
             <div class="form-group">
               <label for="newFlagName">Mots clés</label>
-              <input type="text" class="form-control" id="newFlagKeyWords" placeholder="">
+              <input type="text" class="form-control" name="newFlagKeyWords" placeholder="">
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            <button type="button" class="btn btn-primary">Enregistrer</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
 
 
-            <!-- New Flag modal -->
+        <!-- New Filter modal -->
         <div class="modal fade" id="newFilterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <form class="modal-content" method="POST" action="{% url 'addNewFilter' %}">
+              {% csrf_token %}
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Nouveau filtre</h4>
@@ -189,18 +477,18 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label for="newFilterName">Nom du nouveau filtre</label>
-                  <input type="text" class="form-control" id="newFilterName" placeholder="Nom">
+                  <input type="text" class="form-control" name="newFilterName" placeholder="Nom">
                 </div>
                 <div class="form-group">
                   <label for="newFilterName">Mots clés</label>
-                  <input type="text" class="form-control" id="newFilterKeyWords" placeholder="">
+                  <input type="text" class="form-control" name="newFilterKeyWords" placeholder="">
                 </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Enregistrer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
 
