@@ -13,7 +13,6 @@ pip install django
 ```
 Attention, il est nécessaire d'éxécuter cette commande en tant qu'administrateur
 ## Base de données
-...
 
 # Configuration
 ## API Twitter

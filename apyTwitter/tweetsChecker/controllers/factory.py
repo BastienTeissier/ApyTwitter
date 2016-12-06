@@ -38,8 +38,6 @@ class Factory:
             self.addFilter(fil)
         r = Factory.cTwitter.makeGetRequest("https://api.twitter.com/1.1/search/tweets.json", fil.dico())
         self.flagManager.putFlags(r)
-        if fil.name:
-            self.filters += [fil]
         return r
 
     def addFlag(self, flag):
