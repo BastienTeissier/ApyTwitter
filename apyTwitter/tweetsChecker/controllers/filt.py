@@ -34,7 +34,8 @@ class Filt:
             keys.append(word.lower())
         self._key_words = keys
 
-    # Créer des properties pour tous les attributs sauf count. La modification des filtres se fait par ajout de nouveaux filtres ou suppression d'existants
+    '''Créer des properties pour tous les attributs sauf count.
+    La modification des filtres se fait par ajout de nouveaux filtres ou suppression de ceux existants'''
 
     @property
     def name(self):

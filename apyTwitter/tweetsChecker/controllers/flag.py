@@ -32,7 +32,8 @@ class Flag:
             keys.append(word.lower())
         self._key_words = keys
 
-    # Créer des properties pour tous les attributs. La modification de flag se fait par ajout de nouveaux flags ou suppression d'existants.
+    '''Créer des properties pour tous les attributs.
+    La modification de flag se fait par ajout de nouveaux flags ou suppression d'existants.'''
 
     @property
     def name(self):

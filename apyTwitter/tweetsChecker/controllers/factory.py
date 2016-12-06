@@ -19,9 +19,8 @@ class Factory:
         self.flagManager = fM(flags)
         self.filters = filters
 
-    # Ajout des nouveaux flags/filters dans mainRest
-
     def makeRequestWithExistingFilter(self, filter_name, count=0):
+        '''Récupère les Tweets correspondants au filtre '''
         r = []
         for fil in self.filters:
             if fil.name == filter_name:
@@ -35,6 +34,7 @@ class Factory:
         return r
 
     def makeRequestWithNewFilter(self, fil):
+        '''Ajoute un nouveau filtre et fait la requête à Twitter'''
         if fil.name!="":
             self.addFilter(fil)
         r = Factory.cTwitter.makeGetRequest("https://api.twitter.com/1.1/search/tweets.json", fil.dico())
@@ -42,6 +42,8 @@ class Factory:
         return r
 
     def addFlag(self, flag):
+        '''Convertit un flag en modèle et le sauvegarde dans la base de données.
+        Le flag est ensuite ajouté à la liste des flags de la factory'''
         model = FlagModel()
         model.to_model(flag)
         model.save()
@@ -57,6 +59,7 @@ class Factory:
         self.flagManager.setFlags(self.flags)
 
     def deleteFlag(self, flag_name):
+        '''Supprime un flag de la liste et son modèle de la base de données'''
         for flag in self.flags:
             if flag.clean_name == flag_name:
                 self.flags.remove(flag)
@@ -65,12 +68,15 @@ class Factory:
                 break
 
     def addFilter(self, fil):
+        '''Convertit un filtre en son modèle et le sauvegarde.
+        Le filtre est ensuite ajouté à la liste des filtres'''
         model = FiltModel()
         model.to_model(fil)
         model.save()
         self.filters.append(fil)
 
     def deleteFilter(self, filter_name):
+        '''Supprime un filtre de la liste et son modèle de la base de données'''
         for fil in self.filters:
             if fil.clean_name == filter_name:
                 self.filters.remove(fil)
