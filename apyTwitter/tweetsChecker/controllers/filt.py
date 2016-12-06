@@ -47,7 +47,7 @@ class Filt:
 
     @property
     def clean_name(self):
-        return urllib.parse.quote(self._name.replace(" ","_").replace("/",""), safe='')
+        return self._name.replace(" ","_").replace("/","")
 
     @property
     def key_words(self):

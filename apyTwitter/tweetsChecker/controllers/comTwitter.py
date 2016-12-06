@@ -7,6 +7,8 @@ from ..controllers.tweet import Tweet
 class ComTwitter:
 
     def __init__(self):
+
+        #Génération de la clé et authentification auprès de Twitter
         s = userKey + ':' + secretKey
         print(s)
         s64 = base64.b64encode(bytes(s.encode()))
@@ -28,7 +30,7 @@ class ComTwitter:
     def tokenBearer(self):
         print(self.token_bearer)
 
-    # Corriger les erreurs, faire marcher filtre
+    # Fonction gérant la requête à Twitter
     def makeGetRequest(self, url, filt):
         data = filt
         headers = {

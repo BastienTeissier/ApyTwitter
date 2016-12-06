@@ -10,26 +10,19 @@ from .controllers.filt import Filt
 from .controllers.flag import Flag
 
 from .controllers.factory import Factory
-'''
-factory = Factory( [
-    Flag("Primaire", ["Primaire"]),
-    Flag("USA2016", ["Clinton","Obama"]),
-    Flag("Sarkozy", ["sarkozy"]),
-    Flag("Flag4", ["key_words"]),
-], [
-    Filt("Trump", ["Trump"]),
-    Filt("Fillon", ["Fillon"]),
-    Filt("Juppe", ["Juppe, Juppé"]),
-    Filt("Sarkozy", ["Sarkozy"]),
-])
-'''
 
+# Instanciation de la factory qui sera manipulée par la vue
 factory = Factory()
 
+# Page d'accueil de l'application web, aucun tweet n'est chargé
 def index (request):
+    '''
+    On récupère les listes de filtres/flags depuis notre factory
+    Ces listes proviennent à priori de la base de donnée
+    '''
     filts = factory.filters
     flags = factory.flags
-    #tweets = factory.makeRequestWithNewFilter(Filt("US2016", ["Trump", "Hillary", "Obama"]))
+    # Les tweets sont instanciés à la liste vide
     tweets = []
     template = loader.get_template('tweetsChecker/index.html')
     context = {
@@ -39,6 +32,7 @@ def index (request):
     }
     return HttpResponse(template.render(context, request))
 
+# Controller appelé à chaque fois qu'un filtre est rechargé (on renouvelle les tweets)
 def reloadFilter(request, filter_name):
     print(filter_name)
     filts = factory.filters
@@ -52,6 +46,7 @@ def reloadFilter(request, filter_name):
     }
     return HttpResponse(template.render(context, request))
 
+# Controller utilisé pour l'ajout d'un nouveau flag, renvoie à la page de base
 def addNewFlag(request):
     if request.method == 'POST' and request.POST['newFlagName'] and request.POST['newFlagKeyWords']:
         print(request.POST['newFlagName'])
@@ -59,6 +54,7 @@ def addNewFlag(request):
         factory.addFlag(request.POST['newFlagName'],request.POST['newFlagKeyWords'].split(" "))
     return redirect("index")
 
+# Controlle utilise pour rajouter un nouveau filtre, renvoie la page charger avec le nouveau filtre
 def addNewFilter(request):
     if request.method == 'POST' and request.POST['newFilterName'] and request.POST['newFilterKeyWords']:
         print(request.POST['newFilterName'])
@@ -77,16 +73,17 @@ def deleteFlag(request, flag_name):
     factory.deleteFlag(flag_name)
     return redirect("index")
 
+# Controller utilisé pour la recherche sans filtre persistant
 def search(request):
     if request.method == 'POST' and request.POST['keyWords']:
-            filts = factory.filters
-            flags = factory.flags
-            tweets = factory.makeRequestWithNewFilter(Filt("",request.POST['keyWords'].split(" ")))
-            print(tweets)
-            template = loader.get_template('tweetsChecker/index.html')
-            context = {
-                'tweets' : tweets,
-                'filts' : filts,
-                'flags' : flags
-            }
-            return HttpResponse(template.render(context, request))
+        filts = factory.filters
+        flags = factory.flags
+        tweets = factory.makeRequestWithNewFilter(Filt("",request.POST['keyWords'].split(" ")))
+        print(tweets)
+        template = loader.get_template('tweetsChecker/index.html')
+        context = {
+            'tweets' : tweets,
+            'filts' : filts,
+            'flags' : flags
+        }
+        return HttpResponse(template.render(context, request))
