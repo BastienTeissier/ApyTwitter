@@ -3,6 +3,7 @@ from ..controllers.flagManager import FlagManager as fM
 from ..controllers.filt import Filt
 from ..controllers.flag import Flag
 from ..controllers.tweet import Tweet
+from ..controllers.Exceptions import *
 from ..models import FlagModel, FiltModel
 
 

@@ -1,4 +1,5 @@
 import urllib
+from ..controllers.Exceptions import *
 
 class Filt:
     def __init__(self, name, key_words, count = 100 ):
@@ -11,7 +12,7 @@ class Filt:
         '''
 
         if not isinstance(name,str):
-            raise TypeError("Le nom du filtre doit être une chaine de caractères")
+            raise Nom_incorrect()
         if not isinstance(key_words, list):
             raise TypeError("key_words doit être une liste")
         for words in key_words:
@@ -21,7 +22,7 @@ class Filt:
             raise TypeError("Entrez un nombre entier de tweets")
         for words in key_words:
             if words.strip() == "":
-                raise ValueError("Entrez des mots clés corrects")
+                raise Mots_cles_incorrects()
         #if name.strip() == "":
         #    raise ValueError("Entrez un nom de filtre correct")
         if count <= 0:
@@ -72,3 +73,4 @@ if __name__ == "__main__":
     print(filt1.count)
     print(filt1.key_words)
     print(filt1.dico())
+
