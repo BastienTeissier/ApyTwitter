@@ -2,12 +2,14 @@
 
 # Présentation
 ApyTwitter est une application collectant les tweets les plus récents en fonction de mots-clés renseignés par l'utilisateur.
-Ces mots-clés sont stockés dans une liste de "Filtres" persistant à chaque redémarrage.
+Ces mots-clés sont stockés dans une liste de "Filtres" persistants à chaque redémarrage.
 Les tweets pourront également être précédés de "Flags" en fonction des mots présents dans le tweet pour permettre un tri plus aisé.
 
 # Installation
 ## Python
 La version de Python utilisée pour le développement de cette application est la 3.5 que l'on peut télécharger ici :
+
+https://www.python.org/downloads/
 
 ## Django
 Django peut être facilement installer à l'aide de l'installateur de packet de python : pip
@@ -39,8 +41,17 @@ python manage.py runserver
 Il est ensuite possible d'accéder à l'application depuis un navigateur en allant à l'adresse:
 http://localhost:8000/tweetsChecker
 ## Recherche
+Il existe deux modes de recherche:
+
+-> La barre de recherche rapide, permettant d'afficher directement les tweets les plus récents contenant les mots-clés renseignés. Les mots-clés devront être séparés par un espace.
+
+-> Les filtres: chaque filtre est lié à une liste de mots-clés renseignée à la création du filtre. Le bouton reload permettant de relancer la recherche de tweets associée à ces mots clés. 
+
 ## Création d'un nouveau filtre
+Pour créer un nouveau filtre, il faut appuyer sur le bouton "Nouveau Filtre" et renseigner les champs "Nom du filtre" et "Mots-clés". Les mots-clés successifs devront être séparés par un espace.
+
 ## Création d'un nouveau flag
+Pour créer un nouveau flag, il faut appuyer sur le bouton "Nouveau Flag" et renseigner les champs "Nom du flag" et "Mots-clés". Les mots-clés successifs devront être séparés par un espace.
 
 
 # Précisions techniques
@@ -54,6 +65,7 @@ En effet, l'API Twitter recherche les mots-clés dans le texte du tweet mais ég
 
 ## Choix de Django et de Bootstrap
 Pour développer nos compétences, nous avons décidé de travailler sur ces deux frameworks de développement web très utilisés.
+
 -> Django: Le plus gros framework de développement web en Python.
 
 -> Bootstrap: Rapide à prendre en main, facile d'utilisation et proposant de beaux designs. 
