@@ -1,7 +1,6 @@
 import json, base64, requests
 
-from ..controllers.config import userKey, secretKey
-
+from ..controllers.config import userKey, secretKey, logging
 from ..controllers.tweet import Tweet
 
 
@@ -10,12 +9,13 @@ class ComTwitter:
     def __init__(self):
 
         #Génération de la clé et authentification auprès de Twitter
+        logging.info('Creation d\'un ComTwitter')
         s = userKey + ':' + secretKey
-        print('userKey : secretKey',s)
+        logging.info('userKey : secretKey = %s',s)
         s64 = base64.b64encode(bytes(s.encode()))
-        print(s64)
+        logging.info('After encoding : %s', s64)
         s = str(s64.decode())
-        print(s)
+        logging.info('s = %s', s)
         headers = {
             'Authorization' : 'Basic ' + s,
             'Content-Type' : 'application/x-www-form-urlencoded',
@@ -25,7 +25,7 @@ class ComTwitter:
             'grant_type' : 'client_credentials'
         }
         r = requests.post('https://api.twitter.com/oauth2/token', headers = headers, data = data)
-        print(r.text)
+        logging.info('r.text : %s', r.text)
         self.token_bearer = json.loads(r.text)['access_token']
 
     def tokenBearer(self):
@@ -33,6 +33,7 @@ class ComTwitter:
 
     # Fonction gérant la requête à Twitter
     def makeGetRequest(self, url, filt):
+        logging.info('Fait une requête GET avec le filtre %s', filt)
         data = filt
         headers = {
             'Authorization' : 'Bearer ' + self.token_bearer,
@@ -40,7 +41,7 @@ class ComTwitter:
             'User-Agent' : 'ApyTwitter v1.0'
         }
         r = requests.get(url, headers = headers, params=data)
-        print(r)
+        logging.debug('Résultat obtenu = %s', r)
         return self.generateTweet(r)
 
     def extractHashtags(self, hashtags):
@@ -51,6 +52,7 @@ class ComTwitter:
 
     # Genère les objets tweet à partir des données reçues de Tweeter
     def generateTweet(self, r):
+        logging.info('Generating Tweets')
         j = json.loads(r.text)
         ts = j["statuses"]
         l = []
@@ -63,7 +65,7 @@ class ComTwitter:
                 str(t["user"]["name"]),
                 int(t["user"]["followers_count"])
             ))
-        print(l)
+        logging.info('%s Tweets ont été générés', len(l))
         return l
 
 

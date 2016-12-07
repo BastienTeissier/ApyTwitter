@@ -5,6 +5,7 @@ from ..controllers.flag import Flag
 from ..controllers.tweet import Tweet
 from ..controllers.Exceptions import *
 from ..models import FlagModel, FiltModel
+from ..controllers.config import logging
 
 
 class Factory:
@@ -18,6 +19,7 @@ class Factory:
         self.flags = flags
         self.flagManager = fM(flags)
         self.filters = filters
+        logging.info('Creation d\'une factory avec les flags %s et les filtres %s', [flag.name for flag in flags], [filt.name for filt in filters])
 
     def makeRequestWithExistingFilter(self, filter_name, count=0):
         '''Récupère les Tweets correspondants au filtre '''
