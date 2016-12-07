@@ -11,11 +11,11 @@ class ComTwitter:
         #Génération de la clé et authentification auprès de Twitter
         logging.info('Creation d\'un ComTwitter')
         s = userKey + ':' + secretKey
-        logging.info('userKey : secretKey = %s',s)
+        logging.debug('userKey : secretKey = %s',s)
         s64 = base64.b64encode(bytes(s.encode()))
-        logging.info('After encoding : %s', s64)
+        logging.debug('After encoding : %s', s64)
         s = str(s64.decode())
-        logging.info('s = %s', s)
+        logging.debug('s = %s', s)
         headers = {
             'Authorization' : 'Basic ' + s,
             'Content-Type' : 'application/x-www-form-urlencoded',
@@ -41,7 +41,7 @@ class ComTwitter:
             'User-Agent' : 'ApyTwitter v1.0'
         }
         r = requests.get(url, headers = headers, params=data)
-        logging.debug('Résultat obtenu = %s', r)
+        logging.info('Résultat obtenu = %s', r)
         return self.generateTweet(r)
 
     def extractHashtags(self, hashtags):
