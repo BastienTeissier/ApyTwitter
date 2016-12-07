@@ -5,6 +5,7 @@ from ..controllers.flag import Flag
 from ..controllers.tweet import Tweet
 from ..controllers.Exceptions import *
 from ..models import FlagModel, FiltModel
+from ..controllers.config import logging
 
 
 class Factory:
@@ -18,13 +19,16 @@ class Factory:
         self.flags = flags
         self.flagManager = fM(flags)
         self.filters = filters
+        logging.info('Creation d\'une factory avec les flags %s et les filtres %s', [flag.name for flag in flags], [filt.name for filt in filters])
 
     def makeRequestWithExistingFilter(self, filter_name, count=0):
         '''Récupère les Tweets correspondants au filtre '''
+        logging.info('Requête avec le filtre : %s', filter_name)
         r = []
         for fil in self.filters:
             if fil.name == filter_name:
-                if count ==0 :
+                logging.info('Filtre trouvé')
+                if count == 0 :
                     count = fil.count
                 else:
                     fil.count = count
@@ -35,6 +39,7 @@ class Factory:
 
     def makeRequestWithNewFilter(self, fil):
         '''Ajoute un nouveau filtre et fait la requête à Twitter'''
+        logging.info('Requête avec le nouveau filtre : %s', fil.name)
         if fil.name!="":
             self.addFilter(fil)
         r = Factory.cTwitter.makeGetRequest("https://api.twitter.com/1.1/search/tweets.json", fil.dico())
@@ -47,6 +52,7 @@ class Factory:
         model = FlagModel()
         model.to_model(flag)
         model.save()
+        logging.info('Nouveau flag %s ajouté à la base de donnée', flag.name)
         self.flags.append(flag)
         self.flagManager.setFlags(self.flags)
 
@@ -55,6 +61,7 @@ class Factory:
         model = FlagModel()
         model.to_model(flag)
         model.save()
+        logging.info('Nouveau flag %s ajouté à la base de données', name)
         self.flags.append(Flag(name, key_words))
         self.flagManager.setFlags(self.flags)
 
@@ -65,6 +72,7 @@ class Factory:
                 self.flags.remove(flag)
                 self.flagManager.setFlags(self.flags)
                 FlagModel.delete_flag(flag.name)
+                logging.info('Le flag %s a été supprimé de la base de données', flag_name)
                 break
 
     def addFilter(self, fil):
@@ -73,6 +81,7 @@ class Factory:
         model = FiltModel()
         model.to_model(fil)
         model.save()
+        logging.info('Le nouveau filtre %s a été ajouté à la base données', fil.name)
         self.filters.append(fil)
 
     def deleteFilter(self, filter_name):
@@ -81,6 +90,7 @@ class Factory:
             if fil.clean_name == filter_name:
                 self.filters.remove(fil)
                 FiltModel.delete_filt(fil.name)
+                logging.info('Le filtre %s a été supprimé de la base de données', filter_name)
                 break
 
 
