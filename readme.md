@@ -1,4 +1,5 @@
-﻿# ApyTwitter
+
+# ApyTwitter
 
 # Présentation
 ApyTwitter est une application collectant les tweets les plus récents en fonction de mots-clés renseignés par l'utilisateur.
@@ -45,7 +46,7 @@ Il existe deux modes de recherche:
 
 -> La barre de recherche rapide, permettant d'afficher directement les tweets les plus récents contenant les mots-clés renseignés. Les mots-clés devront être séparés par un espace.
 
--> Les filtres: chaque filtre est lié à une liste de mots-clés renseignée à la création du filtre. Le bouton reload permettant de relancer la recherche de tweets associée à ces mots clés. 
+-> Les filtres: chaque filtre est lié à une liste de mots-clés renseignée à la création du filtre. Le bouton reload permettant de relancer la recherche de tweets associée à ces mots clés.
 
 ## Création d'un nouveau filtre
 Pour créer un nouveau filtre, il faut appuyer sur le bouton "Nouveau Filtre" et renseigner les champs "Nom du filtre" et "Mots-clés". Les mots-clés successifs devront être séparés par un espace.
@@ -58,7 +59,7 @@ Pour créer un nouveau flag, il faut appuyer sur le bouton "Nouveau Flag" et ren
 ## Limites inhérentes à l'API Twitter
 -> Suite à une mise à jour récente, le texte des tweets trop long ne s'affiche pas en entier.
 
--> Lors d'une recherche, certains tweets ne semblent pas contenir les mots-clés du filtre. Cela concerne les tweets contenant un lien. 
+-> Lors d'une recherche, certains tweets ne semblent pas contenir les mots-clés du filtre. Cela concerne les tweets contenant un lien.
 En effet, l'API Twitter recherche les mots-clés dans le texte du tweet mais également dans l'aperçu de cet éventuel lien.
 
 -> Un filtre ne peut pas contenir plus de 500 mots-clés différents.
@@ -68,18 +69,18 @@ Pour développer nos compétences, nous avons décidé de travailler sur ces deu
 
 -> Django: Le plus gros framework de développement web en Python.
 
--> Bootstrap: Rapide à prendre en main, facile d'utilisation et proposant de beaux designs. 
+-> Bootstrap: Rapide à prendre en main, facile d'utilisation et proposant de beaux designs.
 
 ## Choix modèles/classes
 Dans ce projet, il y a redondance entre les classes python et les modèles Django. Cela vient du fait que nous avons commencé ce projet en ligne de commande en utilisant des classes avant de passer sous Django.
 
 ## Nombre de tweets affichés
-Nous avons pensé rajouter la fonction de nombre de tweets affichés sur la page (la notion de count est d'ailleurs présent à plusieurs endroits du code). 
+Nous avons pensé rajouter la fonction de nombre de tweets affichés sur la page (la notion de count est d'ailleurs présent à plusieurs endroits du code).
 Mais finalement, cela ne nous a pas semblé pertinent d'un point de vue UX due aux limitiations de l'API (100 tweets max affichés par requête).
 
 ## Persistence des données
 La présence d'une BDD interfacée avec Django permet la persistence des différents filtres et flags.
-Cependant, nous avons laissé la possibilité de faire une recherche sans sauvegarde de filtre grâce à la barre de recherche rapide. 
+Cependant, nous avons laissé la possibilité de faire une recherche sans sauvegarde de filtre grâce à la barre de recherche rapide.
 
 ## Warning: Utilisation de la BDD
 Si une erreur passe dans la BDD, cela peut empêcher le programme de démarrer (conflits d'urls). Dans ce cas, il faut re-télécharger une version antérieure et fonctionnelle de la BDD.
@@ -90,5 +91,5 @@ L'ajout de la fonction modification d'un filtre ou d'un flag ne nous semblait pa
 ## Multithreading
 Nous n'avons pas vu la pertinence du multithreading dans ce projet. Le point limitant aurait été la collecte des tweets, partie très bien gérée par l'API Twitter.
 
-## Factory Pattern
-
+## Factory
+Pour éviter d'avoir à instancier à plusieurs reprises une connexion à Twitter et à notre base de données, nous avons adopté une version adaptée du factory pattern qui est chargée d'instancier les différentes connexions une seule et unique fois, ainsi que de centraliser tous les appels aux  méthodes pour éviter d'avoir à gérer un trop grand nombre de variables provenants d'objets différents.
